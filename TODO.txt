@@ -1,0 +1,5 @@
+zlozonosc algorytmow #TODO
+
+wyszukiwanie binarne
+
+sortowanie przez wstawianie i babelkowe
