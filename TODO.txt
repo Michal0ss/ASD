@@ -1,5 +1,5 @@
-zlozonosc algorytmow #TODO
+zlozonosc algorytmow #DONE
 
-wyszukiwanie binarne
+wyszukiwanie binarne #DONE
 
-sortowanie przez wstawianie i babelkowe
+sortowanie przez wstawianie i babelkow #DONE

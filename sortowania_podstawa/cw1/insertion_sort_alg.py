@@ -1,5 +1,5 @@
 
-def insert_sort(arr):
+def bubble_sort(arr):
     """ We start with second element of the array as first element in the array is assumed to be sorted.
         Compare second element with the first element and check if the second element is smaller then swap them.
         Move to the third element and compare it with the first two elements and put at its correct position
