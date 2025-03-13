@@ -5,7 +5,7 @@ def triangle_can_exist(arr):
     wykonujemy to tak ze bierzemy dwa pierwsze wyrazu porownujemy az do momentu ich sumy bedzie mniejsza
     (nierownosc trojkata)
 
-    bierzemy kolejna pare (1 w prawo) i idziemy dalej
+    bierzemy kolejna pare (1 lecture prawo) i idziemy dalej
 
     algorytm gasienicy"""
 
