@@ -1,7 +1,4 @@
 # sorting with pivot point
-from sympy import sequence
-
-
 def quick_sort(seq):
     n = len(seq)
     if n <= 1:

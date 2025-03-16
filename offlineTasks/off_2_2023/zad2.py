@@ -1,3 +1,6 @@
+
+
+from zad2testy import runtests
 """
 Opis algorytmu:
 Algorytm wykorzystuje strukture kopca max, stad dodatkowe funkcje pomocnicze: heapify, buildheap.
@@ -10,13 +13,11 @@ Tak przedstawiony algorytm dziala, gdyz to, czy zaczniemy brac snieg od wejsc, c
 nie ma znaczenia - suma zebranego sniegu bedzie taka sama, bo ten topnieje. Najlepiej opisac to na przykladzie:
 S = [15,16,3,59,24,16]. Widac, ze najlepiej zaczac od prawej strony i wziac 16,24,59 itd ; suma sniegu to bedzie
 16 + 23 + 57 = 96 itd..., ale te sama sume dostaniemy, gdy wezmiemy 59 + 23 + 14 = 96 , gdyz snieg stopnial 
-w kazdym przypadku o 3. Widzimy wiec, ze nie ma znaczenia efektywny wybor sniegu z wejsc, czy branie go od wartosci najwiekszych w "posortowanej" tablicy.
+w kazdym przypadku o 3. Widzimy wiec, ze nie ma znaczenia efektywny wybor sniegu z wejsc, 
+czy branie go od wartosci najwiekszych w "posortowanej" tablicy.
 
 Zlozonosc O(nlogn)
 """
-
-from zad2testy import runtests
-
 
 """System chłodzenia serwerów na pewnej uczelni wymaga stałych dostaw śniegu. 
 Grupa zmotywowanych profesorów odnalazła w wysokich górach wąwóz, z którego można przywieźć śnieg. Wąwóz jest
@@ -41,9 +42,9 @@ zabezpieczany i już się nie topi).
 
 
 #
-def left(i): return 2*i + 1
-def right(i): return 2*i + 2
-def parent(i): return ( i - 1 ) // 2
+def left(i): return 2*i + 1 # left child
+def right(i): return 2*i + 2 # right child
+def parent(i): return ( i - 1 ) // 2 # parent
 #
 
 def heapify(A, i, n):
@@ -52,8 +53,8 @@ def heapify(A, i, n):
     r = right(i)
     max_ind = i
     #
-    if l < n and A[ l ] > A[ max_ind ]: max_ind = l
-    if r < n and A[ r ] > A[ max_ind ]: max_ind = r 
+    if l < n and A[ l ] > A[ max_ind ]: max_ind = l # if left is in the arr and if left child is bigger than parent
+    if r < n and A[ r ] > A[ max_ind ]: max_ind = r
     #
     if max_ind != i:
         A[i], A[max_ind] = A[max_ind], A[i]
@@ -80,10 +81,10 @@ def snow( S ):
     #
     buildheap(S)
     #
-    while S[ 0 ] - pom > 0 and index >= 0:
-        S[0], S[index] = S[index], S[0]
+    while S[ 0 ] - pom > 0 and index >= 0: # until the snow will meltdown and we wont get out of range
+        S[0], S[index] = S[index], S[0] # replace first with the last one because we already built heap
         sum_snow += S[ index ] - pom
-        heapify(S, 0, index)
+        heapify(S, 0, index) # we are using heapify func and then we decrase by 1 index so we wont use the biggest num
         pom += 1
         index -= 1
     #end while
