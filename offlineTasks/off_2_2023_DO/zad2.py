@@ -41,6 +41,10 @@ zabezpieczany i już się nie topi).
 """
 
 
+
+
+
+
 #
 def left(i): return 2*i + 1 # left child
 def right(i): return 2*i + 2 # right child
@@ -59,7 +63,7 @@ def heapify(A, i, n):
     if max_ind != i:
         A[i], A[max_ind] = A[max_ind], A[i]
         heapify(A, max_ind, n)
-    #end if 
+    #end if
 
 #end def heapify() ^^^
 
@@ -71,6 +75,7 @@ def buildheap(A):
         heapify(A, i, n)
 #end def buildheap() ^^^
 
+# tworzymy kupiec zatem najwieksze elementy tabicy beda na poczatku listy
 
 def snow( S ):
     #

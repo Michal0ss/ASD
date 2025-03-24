@@ -3,7 +3,8 @@ def swap(lst, i, j):
 
 def siftDown(lst,i,upper):
     while (True):
-        l,r = i*2+1, i*2+2 # refering to the parent children node and heap in the tree
+        l = i*2+1
+        r = i*2+2 # refering to the parent children node and heap in the tree
         if max(l,r) < upper: # it means we have two children
             if lst[i] >= max(lst[l], lst[r]): break
             elif lst[l]>lst[r]: # which child is greater? righ one or left one
@@ -13,6 +14,7 @@ def siftDown(lst,i,upper):
                 swap(lst, i, r)
                 i=r
 
+        #if we have only eft or right children
         elif  l < upper: # left child
             if lst[l] > lst[i]: # if child is bigger than a parent
                 swap(lst, i, l)
