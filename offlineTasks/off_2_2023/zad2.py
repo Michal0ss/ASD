@@ -88,7 +88,7 @@ def snow( S ):
     #
     while S[ 0 ] - pom > 0 and index >= 0: # until the snow will meltdown and we wont get out of range
         S[0], S[index] = S[index], S[0] # replace first with the last one because we already built heap
-        sum_snow += S[ index ] - pom
+        sum_snow += S[ index ] - pom # we are adding the snow from the end of arr that we are currently at
         heapify(S, 0, index) # we are using heapify func and then we decrase by 1 index so we wont use the biggest num
         pom += 1
         index -= 1
