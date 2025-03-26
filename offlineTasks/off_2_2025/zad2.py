@@ -59,9 +59,5 @@ def count_inversions(arr):
 
     return inversion_merge + inversion_l + inversion_r
 
-
-# Odkomentuj by uruchomic duze testy
-# runtests( strong_string, all_tests=True )
-
 # Zakomentuj gdy uruchamiasz duze testy
 runtests( count_inversions, all_tests=True )

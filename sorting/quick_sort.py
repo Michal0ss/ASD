@@ -1,21 +1,22 @@
 # sorting with pivot point
-def quick_sort(seq):
-    n = len(seq)
-    if n <= 1:
-        return seq
-    else:
-        pivot = seq.pop()
+def partition(arr,low,high):
+    pivot = arr[high]
+    i=low-1
 
-    items_greater = []
-    items_lower = []
+    for j in range(low,high):
+        if arr[j]<pivot:
+            i+=1
+            swap(arr,i,j)
 
-    for item in seq:
-        if item > pivot:
-            items_greater.append(item)
+    swap(arr, i+1, high)
+    return i+1
 
-        else:
-            items_lower.append(item)
+def swap(arr, i,j):
+    arr[i], arr[j] = arr[j], arr[i]
 
-    return quick_sort(items_lower) + [pivot] + quick_sort(items_greater)
+def quickSort(arr, low, high):
+    if low<high:
+        pi = partition(arr,low,high)
 
-print(quick_sort([5,16,814,20,10,1,2,3,16,5]))
+        quickSort(arr, low, pi-1)
+        quickSort(arr, pi+1, high)
