@@ -14,7 +14,6 @@ def partition(arr, low, high):
     i = low - 1
 
     for j in range(low, high):
-
         if arr[j] >= pivot:  # >= bo szukamy większych!
             i += 1
             swap(arr, i, j)

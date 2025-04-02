@@ -71,4 +71,4 @@ def ksum(t,k,p):
     return sum
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( ksum, all_tests=False)
+runtests( ksum, all_tests=True)

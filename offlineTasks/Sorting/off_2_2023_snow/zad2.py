@@ -60,6 +60,7 @@ def heapify(A, i, n):
     if l < n and A[ l ] > A[ max_ind ]: max_ind = l # if left is in the arr and if left child is bigger than parent
     if r < n and A[ r ] > A[ max_ind ]: max_ind = r
     #
+    #if largest is not a root
     if max_ind != i:
         A[i], A[max_ind] = A[max_ind], A[i]
         heapify(A, max_ind, n)
