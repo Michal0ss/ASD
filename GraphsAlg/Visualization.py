@@ -13,9 +13,9 @@ def visualize_search(order, title, G, pos):
         plt.title(title)
         nx.draw(G,pos,with_labels=True, node_color=['r' if n == node else 'g' for n in G.nodes])
         plt.draw()
-        plt.pause(0.5)
+        plt.pause(1)
     plt.show()
-    time.sleep(0.5)
+    time.sleep(1)
 
 
 def generate_connected_random_graph(n,m):
@@ -34,5 +34,5 @@ pos=nx.spring_layout(G)
 #     zakomentowac w zaleznosci jaka wizualizacje chce sie zoabczyc
 
 visualize_search(order_bfs(G, 0), 'BFS Visualization', G, pos) # BFS
-#visualize_search(order_dfs(G, 0), 'DFS Visualization', G, pos)
+visualize_search(order_dfs(G, 0), 'DFS Visualization', G, pos)
 
