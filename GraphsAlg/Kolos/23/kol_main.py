@@ -14,4 +14,4 @@ def beautree(G):
     return None
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( beautree, all_tests = False )
+runtests( beautree, all_tests = True )

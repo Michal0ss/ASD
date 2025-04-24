@@ -1,40 +1,43 @@
 from zad4testy import runtests
-import heapq
+from queue import PriorityQueue
 
 
-def spacetravel( n, E, S, a, b ):
+def spacetravel(n, E, S, a, b):
+    graph = [[] for _ in range(n)]
+    for u, v, t in E:
+        graph[u].append((v, t))
+        graph[v].append((u, t))
 
-    graph = {i: [] for i in range(n)}
-    for u,v,t in E:
-        graph[u].append((v,t))
-        graph[v].append((u,t)) # bo graf nieskierowany
+    #tworze krawedzie tam gdzie wystepuja teleportacje i dodaje im wage 0
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            u, v = S[i], S[j]
+            graph[u].append((v, 0))
+            graph[v].append((u, 0))
 
-    #dodajemy krawedzie przy osobliwosciach (teleportacja) z waga 0
-    for u in S:
-        for v in S:
-            if u != v:
-                graph[u].append((v,0))
 
-    def dijkstra(start):
-        distances = {node: float('inf') for node in range(n)}
-        distances[start]=0
-        heap=[(0, start)] #kolejka priorytetowa (czas, planeta)
+    #  DIJKSTRA
+    distances = [float('inf')] * n
+    distances[a] = 0
+    pq = PriorityQueue()
+    pq.put((0, a))
 
-        while heap:
-            current_dist, u = heapq.heappop(heap)
-            if current_dist > distances[u]:
-                continue
-            for v, weight in graph[u]:
-                if distances[v]>distances[u] + weight:
-                    distances[v] = distances[u] + weight
-                    heapq.heappush(heap, (distances[v], v))
-        return distances
+    while not pq.empty():
+        current_dist, u = pq.get()
 
-    distances_a = dijkstra(a)
-    result = distances_a[b]
+        if u == b: # cel zostal znaleziony
+            return current_dist
 
-    return result if result != float('inf') else None
 
+        if current_dist > distances[u]:
+            continue
+
+        for v, weight in graph[u]:
+            if distances[v] > distances[u] + weight:
+                distances[v] = distances[u] + weight
+                pq.put((distances[v], v))
+
+    return
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
 runtests( spacetravel, all_tests = True )
