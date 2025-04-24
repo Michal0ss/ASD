@@ -5,4 +5,4 @@ def spacetravel( n, E, S, a, b ):
     return None
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( spacetravel, all_tests = False )
+runtests( spacetravel, all_tests = True )

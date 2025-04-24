@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from BFS import order_bfs
 from DFS import order_dfs
+from GraphsAlg.Shortest_path.bfs_path import bfs_shortest_path
+from GraphsAlg.Shortest_path.dijkstra_path import dijkstra
 
 
 def visualize_search(order, title, G, pos):
@@ -31,8 +33,9 @@ G=generate_connected_random_graph(20,20)
 pos=nx.spring_layout(G)
 
 
-#     zakomentowac w zaleznosci jaka wizualizacje chce sie zoabczyc
+"""odkomentowac w zaleznosci jaka wizualizacje chce sie zoabczyc"""
 
-visualize_search(order_bfs(G, 0), 'BFS Visualization', G, pos) # BFS
-visualize_search(order_dfs(G, 0), 'DFS Visualization', G, pos)
-
+#visualize_search(order_bfs(G, 0), 'BFS Visualization', G, pos) # BFS
+#visualize_search(order_dfs(G, 0), 'DFS Visualization', G, pos)
+visualize_search(bfs_shortest_path(G, 0, 10), 'Shortest path Visualization', G, pos)
+print(bfs_shortest_path(G, 0, 10))
