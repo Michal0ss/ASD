@@ -12,7 +12,7 @@ Korzystam z kopca max, gdyz nie ma potrzeby sortowac calej tablicy, bo snieg top
 Tak przedstawiony algorytm dziala, gdyz to, czy zaczniemy brac snieg od wejsc, czy od elementu najwiekszego
 nie ma znaczenia - suma zebranego sniegu bedzie taka sama, bo ten topnieje. Najlepiej opisac to na przykladzie:
 S = [15,16,3,59,24,16]. Widac, ze najlepiej zaczac od prawej strony i wziac 16,24,59 itd ; suma sniegu to bedzie
-16 + 23 + 57 = 96 itd..., ale te sama sume dostaniemy, gdy wezmiemy 59 + 23 + 14 = 96 , gdyz snieg stopnial 
+16 + 23_kruskal + 57 = 96 itd..., ale te sama sume dostaniemy, gdy wezmiemy 59 + 23_kruskal + 14 = 96 , gdyz snieg stopnial 
 w kazdym przypadku o 3. Widzimy wiec, ze nie ma znaczenia efektywny wybor sniegu z wejsc, 
 czy branie go od wartosci najwiekszych w "posortowanej" tablicy.
 

@@ -9,6 +9,7 @@ class Node:
 #end Class
 
 
+"""funckja rekurencyjnie szuka rodzica (potrzebne do algorytmu kruskala)"""
 def Find(x):
     if x.parent != x:
         x.parent = Find( x.parent )
@@ -16,7 +17,7 @@ def Find(x):
     return x.parent
 #end procedure Find()
 
-
+"""funkcja korzystajac z find (szukanie rodzica) laczy dwa zbiory """
 def Union(X, Y): # X - root, Y - root 
     #
     if X.rank > Y.rank:
@@ -35,7 +36,7 @@ def Kruskal(G, Edges, i):
     #
     n = len(G)
     minSpanningTree = []
-    Vertices = [ Node(v) for v in range(n) ]
+    Vertices = [ Node(v) for v in range(n) ] # lista wierzcholkow
 
     sumOfMST = 0
 

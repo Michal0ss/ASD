@@ -28,7 +28,6 @@ def spacetravel(n, E, S, a, b):
         if u == b: # cel zostal znaleziony
             return current_dist
 
-
         if current_dist > distances[u]:
             continue
 
@@ -36,7 +35,6 @@ def spacetravel(n, E, S, a, b):
             if distances[v] > distances[u] + weight:
                 distances[v] = distances[u] + weight
                 pq.put((distances[v], v))
-
     return
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
