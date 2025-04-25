@@ -6,8 +6,12 @@ class Node:
         self.parent = self
         self.rank = 0
     #
-#end Class
 
+
+"""kluczem w zrozumienia zadania jest to, ze poza naszym drzewem rozpinajacym 
+ktore znajdujemy za pomoca algorytmu kruskala kazda krawedz jest 
+albo wieksza od kazdej w drzewie albo mniejsza od kazdej krawedzi drzewa
+rozpinajacego T """
 
 """funckja rekurencyjnie szuka rodzica (potrzebne do algorytmu kruskala)"""
 def Find(x):
@@ -15,11 +19,9 @@ def Find(x):
         x.parent = Find( x.parent )
     #
     return x.parent
-#end procedure Find()
 
 """funkcja korzystajac z find (szukanie rodzica) laczy dwa zbiory """
 def Union(X, Y): # X - root, Y - root 
-    #
     if X.rank > Y.rank:
         Y.parent = X
 
@@ -29,29 +31,24 @@ def Union(X, Y): # X - root, Y - root
     else:
         X.parent = Y 
         Y.rank += 1
-#end procedure Union()
 
 
 def Kruskal(G, Edges, i):
-    #
-    n = len(G)
-    minSpanningTree = []
-    Vertices = [ Node(v) for v in range(n) ] # lista wierzcholkow
+    n = len(G)  # liczba wierzchołków
+    minSpanningTree = []  # tu przechowujemy krawędzie MST
+    Vertices = [Node(v) for v in range(n)]  # struktura Union-Find
+    sumOfMST = 0  # suma wag drzewa
 
-    sumOfMST = 0
-
-    for edge in Edges[ i : len( Edges ) ]:
-        #
+    for edge in Edges[i:]:  # iterujemy od i-tej krawędzi                                                                               \
         a, b, weight = edge
-        rootA, rootB = Find( Vertices[a] ), Find( Vertices[b] )
+        rootA, rootB = Find(Vertices[a]), Find(Vertices[b])
 
-        if rootA != rootB:
-            Union( rootA, rootB )
-            minSpanningTree.append( edge )
-            sumOfMST += weight
-        #end if 
+        if rootA != rootB:  # jeśli nie tworzy cyklu
+            Union(rootA, rootB)  # łącz zbiory
+            minSpanningTree.append(edge)  # dodaj do drzewa
+            sumOfMST += weight  # zwiększ sumę wag
 
-        if len( minSpanningTree ) == n - 1: 
+        if len( minSpanningTree ) == n - 1:
             minEdgeValue = minSpanningTree[0][2]
             maxEdgeValue = minSpanningTree[ n - 2 ][2]
             return minEdgeValue, maxEdgeValue, minSpanningTree, sumOfMST
@@ -59,7 +56,7 @@ def Kruskal(G, Edges, i):
     return None, None, None, None
 #end procedure Kruskal()
 
-
+"""zapisuje krawedzie w liscie edges i zwraca tablice tuple (a,b,waga)"""
 def getEdgesList(G):
     #
     edges = []
@@ -73,7 +70,7 @@ def getEdgesList(G):
     return edges
 #end procedure getEdgesList()
 
-
+"""sprawdzamy czy krawedzie poza mst spelniaja warunki """
 def checkEdges(Edges, minSpanningTree, minEdgeValue, maxEdgeValue):
     #
     for edge in Edges:
