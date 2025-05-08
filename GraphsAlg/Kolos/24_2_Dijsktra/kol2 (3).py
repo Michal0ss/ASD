@@ -22,19 +22,24 @@ def dijkstra(G, s, e):
 
     while not Q.empty():
 
-        (cur_distance, v,time) = Q.get()
+        cur_distance, v, time = Q.get()
+
         if cur_distance > distance[v] and cur_distance > distance_sleep[v]: continue
 
+        # Rozważasz każdą krawędź z v do v_son z wagą weight.
         for v_son, weight in G[v]:
             dist = cur_distance + weight
+            #Jeśli wojownik dojdzie do v_son, przekroczy czas bez snu
             if dist+8 < distance_sleep[v_son] and time+weight<=16: #spanie w v_son
                 distance_sleep[v_son]= dist+8
                 Q.put((dist + 8, v_son,0))
-            
+
+            #Jeśli wojownik dochodzi do v_son bez snu, ale ten marsz ma mniej nieprzespanych godzin niż wcześniej znane dojście.
             if distance_not_sleep[v_son] > time + weight and dist < distance_sleep[v_son] and time+weight<=16: #spanie nie optymalnie ale w v_son mamy mniej nie przespanych godzin
                 distance_not_sleep[v_son]=time+weight
                 Q.put((dist, v_son,time + weight))
 
+            #Jeśli dojście do v_son bez snu jest najlepsze, jakie znalazłeś.
             if dist < distance[v_son] and time+weight<=16: #nie spanie w v_son
                 distance[v_son] = dist
                 distance_not_sleep[v_son]=time + weight

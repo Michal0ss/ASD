@@ -1,5 +1,5 @@
-zlozonosc algorytmow #DONE
-
-wyszukiwanie binarne #DONE
-
-sortowanie przez wstawianie i babelkow #DONE
+belmman ford
+mosty
+kruskal
+topologiczne sortowanie
+bfs dfs
