@@ -7,7 +7,7 @@ class Node:
         self.val = val
         self.next = next
 
-#weird way to solve merge sorting in linked lists
+#weird way to solve merge SortingAlg in linked lists
 def ll_cut(l):
     """v to wskaznik, i wycinamy z ciagu podciag ktory jest rosnacym podciagiem (seria naturalna)"""
 

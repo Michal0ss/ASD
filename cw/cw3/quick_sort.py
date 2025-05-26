@@ -1,5 +1,5 @@
 """partition Lemuto"""
-from sorting.quick_sort import quick_sort
+from SortingAlg.quick_sort import quick_sort
 
 
 def partition(A,p,r):
