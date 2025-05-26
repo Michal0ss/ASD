@@ -27,12 +27,9 @@ def FillObjectives(L, F, n):
 
             if L[y][x] == '#':
                 F[y][x] = [ -float('inf'), -float('inf') ]
-            #
-
-    #end 'for' loops 
 
     return F 
-#end procedure FillObjectives()
+
 
 
 def Traverse( L ):
@@ -71,8 +68,7 @@ def Traverse( L ):
             
             if L[y][x] == '.':
                 F[y][x][0] = max( leftMaxValue, upMaxValue) + 1
-            #
-        #end 'for' loop 
+
 
         if L[n - 1][x] == '.':
             F[n - 1][x][1] = max( F[y][x - 1][0], F[y][x - 1][1] ) + 1
@@ -84,20 +80,13 @@ def Traverse( L ):
 
             if L[y][x] == '.':
                 F[y][x][1] = max( leftMaxValue, downMaxValue ) + 1
-            #
-        #end 'for' loop 
-
-    #end 'for' loop -------------------------------------------------
 
     return F[n - 1][n - 1][0] if F[n - 1][n - 1] != [ -float('inf'), -float('inf') ] else -1
-#end procedure Traverse()
 
 
 
 def maze( L ):
-    #
-    return Traverse( L )
-#end procedure maze()
 
+    return Traverse( L )
 
 runtests( maze, all_tests = True )
