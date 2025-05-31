@@ -16,16 +16,14 @@ def mapArray(T, C, L):
     T.append( (0, L) )
     T.sort( key = lambda x: x[1] )
     return T
-#end procedure mapArray() 
-
 
 def Traverse(O, C, T, L):
     #
     O = mapArray(O, C, L)
     n = len(O)
     F = [ [ float('inf') for _ in range(2) ] for _ in range(n) ]
-    
-    F[0][0] = 0 
+
+    F[0][0] = 0
     F[0][1] = 0
 
     if T >= L: return 0
@@ -34,7 +32,7 @@ def Traverse(O, C, T, L):
 
         for neighbour in reversed( range(station) ):
 
-            if O[station][1] - O[neighbour][1] <= T: 
+            if O[station][1] - O[neighbour][1] <= T:
                 F[station][0] = min( F[station][0], F[neighbour][0] + O[station][0] )
                 F[station][1] = min( F[station][1], F[neighbour][1] + O[station][0] )
 
@@ -42,12 +40,12 @@ def Traverse(O, C, T, L):
                 F[station][1] = min( F[station][1], F[neighbour][0] + O[station][0] )
 
             else: break
-        # 
-    #end 'for' loop 
+        #
+    #end 'for' loop
 
     return min( F[n - 1][0], F[n - 1][1] )
 #end procedure Traverse()
-    
+
 def min_cost( O, C, T, L ):
     #
     return Traverse(O, C, T, L)
