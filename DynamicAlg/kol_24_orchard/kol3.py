@@ -3,19 +3,20 @@ from kol3testy import runtests
 
 def orchard(T, m):
     n = len(T)
-    dp = [n+1] * m # dp[mod] = minimalna liczba wycięć, by suma pozostałych ≡ mod
-    sum_all = sum(T)
-    dp[sum_all%m]=0 # na poczatku nic nie wycinasz
+    F = [[n] * m for _ in range(n)]
 
-    for i in range(n):
-        new_dp = dp[:]
-        for mod in range(m):
-            if dp[mod]<n+1:
-                new_mod = (mod - T[i]) % m
-                if new_dp[new_mod] > dp[mod] + 1:
-                    new_dp[new_mod] = dp[mod] + 1
-        dp = new_dp
-    return dp[0] if dp[0]<n+1 else -1
+    F[0][0] = 1  # zawsze mogę usunąć pierwsze drzewo
+    F[0][T[0] % m] = 0  # warunek brzegowy - nie wycinam drzew aby otrzymać resztę z 0-drzewa
+
+    for i in range(1, n):
+        for j in range(m):
+            F[i][j] = min(F[i][j], F[i - 1][j] + 1)  # mogę ściąć drzewo
+
+            future_rest = (j + T[i]) % m
+            F[i][future_rest] = min(F[i][future_rest], F[i - 1][j])
+
+    return F[n - 1][0]
+
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
 runtests(orchard, all_tests=True)
