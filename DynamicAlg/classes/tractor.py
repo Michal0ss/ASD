@@ -12,14 +12,32 @@
 # Zakładamy tutaj, że można tankować dowolną ilość paliwa.
 # 3) Jak wyżej, ale jeśli tankujemy na stacji to musimy zatankować do pełna.
 
-# Ad.
-# 1) Tankujemy do pełna (zawsze).
-# Zakładam, że tankowałem wcześniej, a potem, że później.
-# Pokazuję, że da się to rozwiązanie poprawić, więc lepiej jest zawsze tankować wcześniej.
-# Załóżmy, że potrafimy dojechać zarówno do P1 i P2 na aktualnym stanie baku.
-# Załóżmy, że tankuję w P1, jadę do P2: liczba paliwa = L-p1+p2
-# Jeśli zatankujemy w P2, to w punkcie L2 (dalszym) mam paliwa L zamiast L-p1+p2 i tankowań też jest i, co
-# jest optymalniejszym rozwiązaniem.
+# zachlanny
 
 # O(n)
 
+
+
+#Zawsze jedź jak najdalej się da na jednym baku.
+#Jeśli już nie możesz jechać dalej, to tankuj na ostatniej dostępnej stacji, do której dojechałeś.
+def refuel(stations, L, destination):
+    stations += [0, destination]  # Add starting point and destination
+    refuels = []  # Initialize refuels count
+    current_fuel = L  # Start with a full tank
+    n = len(stations)
+    position = 0  # Start at the first station
+
+    while position<n-1:
+
+        next_position = position
+
+        while next_position < n-1 and stations[next_position + 1] - stations[position] <= current_fuel:
+            next_position += 1
+        if next_position == position:
+            # If we can't move forward, we are stuck
+            return -1
+        if next_position < n-1:
+            refuels.append(stations[next_position])
+
+        position = next_position
+    return refuels
