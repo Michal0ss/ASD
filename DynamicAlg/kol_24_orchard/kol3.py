@@ -18,5 +18,6 @@ def orchard(T, m):
     return F[n - 1][0]
 
 
+
 # zmien all_tests na True zeby uruchomic wszystkie testy
 runtests(orchard, all_tests=True)
