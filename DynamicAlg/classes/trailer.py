@@ -10,7 +10,7 @@ def greedy_trailer(w, k):
     result = []
 
     for weights in w:
-        while w<=k:
+        while weights<=k:
             result.append(weights)
             k -= weights
 
