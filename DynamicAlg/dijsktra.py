@@ -1,7 +1,7 @@
 # Python implementation of Dijkstra's algorithm using queue.PriorityQueue.
 # The function dijkstra takes a graph in adjacency list form and a start node.
 # It returns the shortest distances from the start node to all other nodes.
-
+from math import inf
 from queue import PriorityQueue
 
 def dijkstra(graph, start):
@@ -11,7 +11,7 @@ def dijkstra(graph, start):
     Returns: list of shortest distances from start to every node
     """
     n = len(graph)
-    dist = [float('inf')] * n
+    dist = [inf] * n
     dist[start] = 0
     visited = [False] * n
     pq = PriorityQueue()
