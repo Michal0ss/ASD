@@ -1,4 +1,3 @@
-from copyreg import dispatch_table
 from math import inf
 from queue import PriorityQueue
 
@@ -13,9 +12,9 @@ def edge_to_adj(edges):
   N= max([x for x,y,w,type in edges] + [y for x,y,w,type in edges]) + 1
   adj_list =  [[] for _ in range(N)]
   for x,y,w,type in edges:
-    adj_list[x].append(y, w, type)  # dodaj krawedz x->y
-    adj_list[y].append(x, w, type)  # dodaj krawedz y->x
-  return adj_list, N
+    adj_list[x].append((y, w, type))  # dodaj krawedz x->y
+    adj_list[y].append((x, w, type))  # dodaj krawedz y->x
+  return adj_list
 
 
 def dijkstra(G, start, end):
@@ -30,7 +29,7 @@ def dijkstra(G, start, end):
     dp = [inf] * n
 
     pq = PriorityQueue()
-    pq.put((0, start, None))  # (distance, node, type)
+    pq.put((0, start, None)) # (distance, node, type)
     di[start] = 0# najlepsze tymczasowe koszty dla indyjskiej linii
     dp[start] = 0# najlepsze tymczasowe koszty dla przylądkowej linii
 
@@ -38,8 +37,7 @@ def dijkstra(G, start, end):
     while not pq.empty():
         u_weight, u, type = pq.get()
         if u == end: break
-        if u_weight > di[u] and u_weight > dp[u]:
-            continue
+        if u_weight > di[u] and u_weight > dp[u]: continue
 
         for v,w,new_type in G[u]:
           if type == None:
@@ -47,20 +45,24 @@ def dijkstra(G, start, end):
                 di[v] = w
             else:
                 dp[v] = w
+            pq.put((w, v, new_type))
+
           elif type == new_type:
             if type == 'I':
-              c=di[u] + w + 5
+              c=u_weight + w + 5
               if di[v]>c:
                 di[v] = c
                 pq.put((c, v, type))
+
             else:
-              c=dp[u] + w + 10
+              c=u_weight + w + 10
               if dp[v]>c:
                 dp[v] = c
                 pq.put((c, v, type))
+
           else:
             if new_type == 'P':
-              c=dp[u] + w + 20
+              c=di[u] + w + 20
               if di[v]>c:
                 di[v] = c
                 pq.put((c, v, new_type))
@@ -71,13 +73,15 @@ def dijkstra(G, start, end):
                 pq.put((c, v, new_type))
 
 
-
-
-
-
-    return di[end]
+    return dp[end] if dp[end] < di[end] else di[end]
 
 def tory_amos( E, A, B ):
-  ...
+    """
+    E: lista krawędzi w postaci (x, y, waga, typ)
+    A: początkowa stacja
+    B: końcowa stacja
+    """
+    G = edge_to_adj(E)
+    return dijkstra(G, A, B)
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( tory_amos, all_tests = False )
+runtests( tory_amos, all_tests = True )
