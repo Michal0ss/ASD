@@ -1,3 +1,5 @@
+from math import inf, floor
+from multiprocessing.resource_tracker import unregister
 from queue import PriorityQueue
 
 from egz1atesty import runtests
@@ -12,7 +14,7 @@ def edge_to_adj(edges):
   for u,v,w in edges:
     adj_l[u].append((v,w)) # dodaj krawedz u->v
     adj_l[v].append((u,w)) # dodaj krawedz v->u (graf nieskierowany)
-  return adj_l, N
+  return adj_l
 
 #def change_weight(B,i_B, w_next):
 #  p=B[i_B][1]
@@ -20,43 +22,45 @@ def edge_to_adj(edges):
 #  new_weight = (w_next * p )// q
 #  return new_weight
 
-def get_B_idx(B):
-  vertecies = []
-  for i,p,q in B:
-    vertecies.append(i)
-  return vertecies
-
-def dijkstra(B, G, start, end):
-  bike_idx = get_B_idx(B)
-  n = len(G)
-  dist = [float('inf')] * n
+def dijkstra(G, start, end):
+  n= len(G)
+  dist = [inf] * n
   dist[start] = 0
+
   pq = PriorityQueue()
-  pq.put((0, start))  # (distance, node)
+  pq.put((0,start))
 
   while not pq.empty():
-    d, u = pq.get()
-    if dist[u]  < d:
-      continue
-    for v, w in G[u]:
-      scaled_w = w
-      if u in bike_idx:
-        p,q= B[u][1], B[u][2]
-        scaled_w = (w * p) // q  # zmieniamy wagę zgodnie z rowerem
-      if dist[v] > d + scaled_w:
-        dist[v] = d + scaled_w
+    wu,u = pq.get()
+    if u == end:
+      break
+    for v,w in G[u]:
+      #relaksacja
+      if dist[v] > wu+w:
+        dist[v] = wu+w
         pq.put((dist[v], v))
-  return dist, dist[end]
 
+  return dist
 
 def armstrong( B, G, s, t):
-  #B - lista rowerow z p i q ktore sa przelicznikami wagi w*p/q
-  n_G, N = edge_to_adj(G)
-  root1, end=dijkstra(n_G, s, t)
+  nG = edge_to_adj(G)
+  n=len(nG)
+  bikes=[1]*n
+  for v,p,q in B:
+    if bikes[v] > p/q:
+      bikes[v] = p/q
+
+  distance = dijkstra(nG, s, t)
+  min_dist = distance[t]
+  distance_reversed = dijkstra(nG, t, s)
+
+  for i in range(n):
+    cost = distance[i] + (distance_reversed[i]*bikes[i])
+    if cost < min_dist:
+      min_dist = cost
+  return floor(min_dist) if min_dist != inf else inf
 
 
-
-  return -1
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( armstrong, all_tests = False )
+runtests( armstrong, all_tests = True )

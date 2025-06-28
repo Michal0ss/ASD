@@ -1,23 +1,25 @@
 from math import inf
-
 from egz1btesty import runtests
 
-
+"""wystarczy nie patrzec na odcinanie poszczegolnych fragmentow bo wowczas zlozonosc bedzie tragiczna.
+Zatem problem rozwiazujemy liczac tylko maksymalne sumy dla podproblemow jak to zazwyczaj w dp.
+Tworzymy liste o dlugosci k+1 na n i zapisujemy sumy dla itego elementu tablicy t dp[i] = max(T[i], dp[i-1] + T[i])
+wtedy sumy fragmentow ladnie nam sie wpisza w tablice dp. """
 def kstrong( T, k):
-  n = len(T)
-  bestof = [[None] * (k + 1) for _ in range(n)]
+    n = len(T)
+    dp = [[0]*(k+1) for _ in range(n)]
+    max_sofar = -inf
+    for i,num in enumerate(T):
+        for j in range(k+1):
 
-  def p(i,j):
-    if bestof[i][j] == None:
-      bestof[i][j] = max(
-        T[i], # bierzemy aktualna (zaczynamy ciag)
-        p(i-1, j-1) if i > 0 and j> 0 else -inf, # pomijamy liczbe
-        T[i] + p(i-1, j) if i > 0 else -inf # bierzemy liczbe i dodajemy do ciagu
-      )
-      return bestof[i][j]
-  return max(p(i,k) for i in range(n))
-
-
-
+            if num >= 0: # wowczas nie polepszy to naszej sumy wiec nie bierzemy tego pod uwage w szukaniu maksimum
+                dp[i][j] = dp[i-1][j] + num
+            else:
+                if j==0:
+                    dp[i][j] = max(0, dp[i-1][j] + num)
+                else:
+                    dp[i][j] = max(dp[i-1][j-1], dp[i-1][j] + num) # max(poprzedni element z poprzednim k, poprzedni element z nowym k)
+            max_sofar = max(max_sofar, dp[i][j])
+    return max_sofar
 # zmien all_tests na True zeby uruchomic wszystkie testy
 runtests( kstrong, all_tests = False )

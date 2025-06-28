@@ -18,7 +18,8 @@ def dijkstra(graph, bike_speeds, start, end):
 
     n= len(graph)
     best_choices = [[inf]*(n+1) for _ in range(n)] # mnoze razy n+1 bo ostatnie pozycje to brak roweru przyda sie pozniej
-    best_choices[start][-1] = 0 # brak roweru = indeks -1
+    best_choices[start][-1] = 0 # brak roweru = indeks -
+    # best_choices[v][bike] – najmniejszy znany czas dotarcia do v, posiadając rower o numerze bike
 
     while not q.empty():
         time, bike, v = q.get()
@@ -37,7 +38,7 @@ def dijkstra(graph, bike_speeds, start, end):
 
         for u, weight in graph[v]:
             speed = bike_speeds[bike] # 1 jesli brak roweru w przeciwnym wypadku przelicznik
-            time_to_u = time + (weight*speed)
+            time_to_u = time + (weight*speed) # przejechany czas + przeliczony czas z jazdy
             if time_to_u < best_choices[u][bike]:
                 best_choices[u][bike] = time_to_u
                 q.put((time_to_u, bike, u))
