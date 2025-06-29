@@ -1,4 +1,3 @@
-
 from egz1Atesty import runtests
 from queue import PriorityQueue
 
