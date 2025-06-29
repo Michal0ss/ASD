@@ -1,6 +1,3 @@
-from collections import defaultdict
-from math import inf
-
 from egz3btesty import runtests
 
 """
@@ -28,9 +25,6 @@ Aktualizujesz max_len = max(max_len, right - left + 1)
 """
 
 # O(n)
-
-from egz3btesty import runtests
-
 def gen_kunlucky_set(T, k, max_num):
     kset = set()
     x = k
