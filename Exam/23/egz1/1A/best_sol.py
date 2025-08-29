@@ -40,6 +40,7 @@ def gold(G, V, s, t, r):
 
     for u in range(n):
         cost_for_robbery_trace = cost_before[u] - V[u] + cost_after_robbery[u]
+        # koszt przebycia trasy = poprzedni koszt dotarcia do u - koszt rabunku u + koszt dotarcia do u po rabunku
         min_cost = min(min_cost, cost_for_robbery_trace)
     return min_cost
 # zmien all_tests na True zeby uruchomic wszystkie testy
