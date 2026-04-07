@@ -1,4 +1,5 @@
 def counting_sort(arr):
+    # O(n+k)
     n=len(arr)
 
     # maximum element of an array

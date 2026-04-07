@@ -9,8 +9,6 @@ Wyniki poszczegolnych sum, dodaje do zmiennej sup, ktora zostaje na koncu zwroco
 Zlozonosc QuickSelecta to O(p). Wywoluje go n razy, wiec zlozonosc ogolna to O(np)
 
 """
-
-
 from kol1testy import runtests
 
 """Dana jest n-elementowa tablica liczb naturalnych T oraz dodatnie liczby naturalne k i p, gdzie
@@ -36,7 +34,7 @@ def partition(T, left, right):
     #
     T[i+1], T[right] = T[right], T[i+1]
 
-    return i + 1 
+    return i + 1
 #end def ^^^
 
 
@@ -64,4 +62,4 @@ def ksum(T, k, p):
 
 
 # zmien all_tests na True zeby uruchomic wszystkie testy
-runtests( ksum, all_tests=False)
+runtests( ksum, all_tests=True)

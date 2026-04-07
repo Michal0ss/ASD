@@ -1,5 +1,3 @@
-
-
 # Dana jest n-elementowa tablica liczb naturalnych T. Dla każdego indeksu i < n, rangą elementu
 # na pozycji i określamy liczbę elementów, które w tablicy występują przed elementem i-tym, a ich
 # wartość jest mniejsza od T [i].

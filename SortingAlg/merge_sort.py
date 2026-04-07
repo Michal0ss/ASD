@@ -6,6 +6,7 @@ def merge_sort(arr):
         R=arr[mid:]
 
         # Recursively sort both halves
+        # !!!
         merge_sort(L)
         merge_sort(R)
         i=j=k=0

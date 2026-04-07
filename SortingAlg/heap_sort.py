@@ -32,7 +32,7 @@ def siftDown(lst,i,upper):
 
 def heapsort(l):
     n=len(l)
-    for j in range(n-2//2, -1, -1): # heapify into the max heap by sift down
+    for j in range((n-2)//2, -1, -1): # heapify into the max heap by sift down
         siftDown(l,j,n)
 
     for end in range(n-1, 0, -1):
